@@ -1,0 +1,13 @@
+.logo {
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: var(--neutral-layer-2-text);
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.logo:hover {
+  color: var(--color-secondary-lighter);
+  text-decoration: none;
+}
