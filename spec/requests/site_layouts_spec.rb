@@ -2,9 +2,13 @@ require 'rails_helper'
 
 RSpec.describe "SiteLayouts", type: :request do
   describe "GET /site_layouts" do
-    it "works! (now write some real specs)" do
-      get site_layouts_path
-      expect(response).to have_http_status(200)
+    it "layout links" do
+      get root_path
+      expect(response.body.include?("<title>Ruby on Rails Tutorial Sample App"))
+      assert_select "a[href=?]", root_path, count: 2
+      [help_path, about_path, contact_path].each do |path|
+        assert_select "a[href=?]", path
+      end
     end
   end
 end
