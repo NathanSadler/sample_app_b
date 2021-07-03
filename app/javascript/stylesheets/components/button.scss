@@ -30,6 +30,11 @@ button {
   font-weight: 500;
 
   -webkit-appearance: none;
+
+  a {
+    color: var(--neutral-layer-app-text);
+    text-decoration: none;
+  }
 }
 
 .btn--primary {

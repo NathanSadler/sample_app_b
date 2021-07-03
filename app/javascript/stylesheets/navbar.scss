@@ -1,0 +1,32 @@
+.navbar {
+  display: flex;
+  flex-direction: row;
+  background: var(--color-black);
+  margin-bottom: var(--space-sm);
+
+  a {
+    color: var(--neutral-layer-1-text);
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: var(--neutral-layer-2-text);
+  }
+
+  .logo {
+    float: left;
+    margin-right: 10px;
+    font-size: 1.7em;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-decoration: none;
+    color: var(--color-white);
+  }
+
+  .logo:hover {
+    color: var(--color-secondary-lighter);
+    text-decoration: none;
+  }
+
+
+}

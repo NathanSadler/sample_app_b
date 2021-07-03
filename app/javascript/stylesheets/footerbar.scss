@@ -1,0 +1,16 @@
+footer{
+  border-top-style: solid;
+  border-top-color: var(--neutral-layer-1-border);
+  border-top-width: var(--space-xxs);
+  padding-top: var(--space-xxs);
+  margin-top: var(--space-lg);
+  align-items: center;
+
+  .info span {
+    color: var(--neutral-layer-3-text);
+  }
+
+  .links span {
+    margin-right: var(--space-md);
+  }
+}

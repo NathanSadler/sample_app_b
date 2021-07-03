@@ -1,7 +1,7 @@
-.flex.flex-row.justify-between
-  .logo
-    p SAMPLE PAGE
+.navbar.justify-between.items-center
+  .logo.margin-left-sm
+    = link_to "sample app", root_path, class: "logo"
   div
-    span.margin-x-md = link_to "Home", '#'
-    span.margin-x-md = link_to "Help", '#'
+    span.margin-x-md = link_to "Home", 'root_path'
+    span.margin-x-md = link_to "Help", 'help_path'
     span.margin-x-md = link_to "Log in", '#'

@@ -2,9 +2,10 @@
   float: left;
   margin-right: 10px;
   font-size: 1.7em;
-  color: var(--neutral-layer-2-text);
   text-transform: uppercase;
   font-weight: bold;
+  text-decoration: none;
+  color: var(--color-white);
 }
 
 .logo:hover {
