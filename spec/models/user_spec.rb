@@ -3,7 +3,8 @@ require 'pry'
 
 RSpec.describe User, type: :model do
   #pending "add some examples to (or delete) #{__FILE__}"
-  let(:user) {User.new(name: "Test user", email: "user@example.com")}
+  let(:user) {User.new(name: "Test user", email: "user@example.com",
+    password: "foobar", password_confirmation: "foobar")}
 
   it("is initially valid") do
     expect(user.valid?).to(eq(true))
@@ -51,5 +52,17 @@ RSpec.describe User, type: :model do
     duplicate_user = user.dup
     user.save
     expect(duplicate_user.valid?).to(eq(false))
+  end
+
+  context('password') do
+    it("should be present") do
+      user.password = user.password_confirmation = " " * 6
+      expect(user.valid?).to(eq(false))
+    end
+
+    it("should be at least 6 chars long") do
+      user.password = user.password_confirmation = " " * 5
+      expect(user.valid?).to(eq(false))
+    end
   end
 end
