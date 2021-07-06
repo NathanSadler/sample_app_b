@@ -1,0 +1,81 @@
+
+//
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+/* mixins, variables, etc. */
+
+$gray-medium-light: #eaeaea;
+
+@mixin box_sizing {
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing:         border-box;
+}
+
+/* some form stuff */
+.signup-form {
+  input {
+    margin-bottom: var(--space-md);
+  }
+  @include box-sizing;
+}
+
+#error-explanation {
+  color: var(--color-danger);
+  ul {
+    color: var(--color-danger);
+    margin: 0 0 var(--space-lg) 0;
+  }
+}
+
+.field_with_errors {
+  @extend .has-error;
+  .form-control {
+    color: $state-danger-text;
+  }
+}
+
+/* sidebar */
+aside {
+  section.user-info {
+    margin-top: var(--space-md);
+  }
+  section {
+    padding: var(--space-sm) 0px;
+    margin-top: var(--space-md);
+    &:first-child {
+      border: 0px;
+      padding-top: 0px;
+    }
+    span {
+      display: block;
+      margin-bottom: var(--space-xxs);
+      line-height: 1;
+    }
+    h1 {
+      text-align: left;
+      margin-bottom: var(--space-xs);
+      margin-top: 0px;
+    }
+  }
+}
+
+.gravatar {
+  float: left;
+  margin-right: var(--space-sm);
+}
+
+.gravatar_edit {
+  margin-top: var(--space-md);
+}
+
+/* miscellaneous */
+
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+  @include box_sizing;
+}

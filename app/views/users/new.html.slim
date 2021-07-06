@@ -1,3 +1,24 @@
 = provide(:title, "Sign Up")
-h1 Sign Up
-p This wonderful website is still under construct
+.flex.flex-col.items-center.signup-form
+  h1 Sign Up
+  = form_with(model: @user, local:true) do |f|
+    div
+      = render 'shared/error_messages'
+
+    div
+      = f.label :name
+      br
+      = f.text_field :name, class: 'form-control'
+
+    div
+      = f.label :email
+      br
+      = f.email_field :email, class: 'form-control'
+
+    - [:password, :password_confirmation].each do |password_symbol|
+      div
+        = f.label password_symbol
+        br
+        = f.password_field password_symbol, class: 'form-control'
+
+    = f.submit "Create my account", class:"btn btn--primary full-width"

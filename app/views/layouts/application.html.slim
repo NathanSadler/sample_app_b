@@ -10,3 +10,4 @@ html
     = render 'layouts/header'
     = yield
     = render 'layouts/footer'
+    = debug(params) if Rails.env.development?
