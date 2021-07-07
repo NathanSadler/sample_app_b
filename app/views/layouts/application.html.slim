@@ -2,6 +2,8 @@ doctype html
 html
   head
     title = full_title(yield(:title))
+    meta charset="utf-8"
+    meta name="viewport" content="width=device-width, initial-scale=1"
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_pack_tag 'stylesheets', 'data-turbolinks-track': 'reload'
@@ -12,4 +14,4 @@ html
       .alert class="alert-#{message_type}" = message
     = yield
     = render 'layouts/footer'
-    = debug(params) if Rails.env.development?
+    

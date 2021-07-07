@@ -1,3 +1,11 @@
-.dropdown-menu {
-  
+.dropdown {
+  display: flex;
+  flex-direction: column;
+  ul {
+    display: block;
+    width: 3em;
+    li {
+      display: block;
+    }
+  }
 }
