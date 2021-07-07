@@ -266,7 +266,7 @@ DEPENDENCIES
   selenium-webdriver
   slim
   spring
-  sqlite3 (~> 1.4)
+  sqlite3 (~> 1.4.2)
   test-prof
   turbolinks (~> 5)
   tzinfo-data
