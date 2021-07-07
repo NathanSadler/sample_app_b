@@ -1,8 +1,3 @@
-
-//
-// @import "bootstrap-sprockets";
-// @import "bootstrap";
-
 /* mixins, variables, etc. */
 
 $gray-medium-light: #eaeaea;
@@ -30,9 +25,14 @@ $gray-medium-light: #eaeaea;
 }
 
 .field_with_errors {
-  @extend .has-error;
+  // @extend .has-error !optional;
   .form-control {
-    color: $state-danger-text;
+    color: var(--color-danger);
+  }
+
+  input.form-control {
+    border-width: var(--space-xxs);
+    border-color: var(--color-danger);
   }
 }
 
