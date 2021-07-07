@@ -68,7 +68,7 @@ end
 
 group :development, :test do
   gem 'factory_bot_rails'
-  'rspec-rails'
+  gem 'rspec-rails'
 end
 
 group :production do
@@ -106,8 +106,5 @@ end
 # group :development, :test do
 #   gem 'factory_bot_rails'
 # end
-#
-# group :development, :test do
-#   gem 'rspec-rails'
-# end
+
 gem 'slim'
