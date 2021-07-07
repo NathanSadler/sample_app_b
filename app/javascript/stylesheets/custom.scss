@@ -36,6 +36,12 @@ $gray-medium-light: #eaeaea;
   }
 }
 
+/* alert */
+.alert {
+  border: var(--space--xs) solid var(--color-neutral-500);
+  border-radius: var(--space-xxs);
+}
+
 /* sidebar */
 aside {
   section.user-info {
