@@ -1,32 +1,84 @@
-.navbar {
+header {
   display: flex;
   flex-direction: row;
-  background: var(--color-black);
-  margin-bottom: var(--space-sm);
-
-  a {
-    color: var(--neutral-layer-1-text);
-    text-decoration: none;
-  }
-
-  a:hover {
-    color: var(--neutral-layer-2-text);
-  }
+  justify-content: space-between;
 
   .logo {
-    float: left;
-    margin-right: 10px;
-    font-size: 1.7em;
-    text-transform: uppercase;
-    font-weight: bold;
-    text-decoration: none;
-    color: var(--color-white);
+      font-size: 1.7em;
+      text-transform: uppercase;
+      font-weight: bold;
+      text-decoration: none;
+      color: var(--color-neutral-500);
+
+      &:hover {
+        color: var(--color-neutral-300);
+      }
   }
 
-  .logo:hover {
-    color: var(--color-secondary-lighter);
-    text-decoration: none;
+  .menu-items {
+    ul {
+      list-style-type: none;
+
+      // The items that display without being overed
+      a, li, ul{
+        color: var(--neutral-layer-1-text);
+        margin: auto var(--space-md);
+        position: relative;
+        display: inline-block;
+      }
+
+      a:hover {
+        color: var(--neutral-layer-2-text);
+      }
+
+      ul {
+        // display: block;
+        padding-left: 0px;
+        margin-left: 0px;
+      }
+
+    }
   }
-
-
 }
+
+// .navbar {
+//   display: flex;
+//   flex-direction: row;
+//   background: var(--color-black);
+//   margin-bottom: var(--space-sm);
+//
+//   ul {
+//       list-style: none;
+//
+//       li {
+//         display: inline-block;
+//         margin: auto var(--space-md);
+//       }
+//   }
+
+//   a {
+//     color: var(--neutral-layer-1-text);
+//     text-decoration: none;
+//   }
+//
+//   a:hover {
+//     color: var(--neutral-layer-2-text);
+//   }
+//
+//   .logo {
+//     float: left;
+//     margin-right: 10px;
+//     font-size: 1.7em;
+//     text-transform: uppercase;
+//     font-weight: bold;
+//     text-decoration: none;
+//     color: var(--color-white);
+//   }
+//
+//   .logo:hover {
+//     color: var(--color-secondary-lighter);
+//     text-decoration: none;
+//   }
+//
+//
+// }

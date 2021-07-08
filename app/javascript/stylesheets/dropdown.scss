@@ -1,0 +1,14 @@
+.dropdown {
+  .dropdown__items {
+    display: none;
+  }
+
+  &:hover {
+    //secondary ul visibility change
+    .dropdown__items {
+      display: block;
+      // margin-top: 15px;
+      position: absolute;
+    }
+  }
+}

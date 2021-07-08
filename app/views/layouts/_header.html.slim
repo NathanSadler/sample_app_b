@@ -1,7 +1,18 @@
-.navbar.justify-between.items-center
-  .logo.margin-left-sm
+header.margin-right-md
+  .logo
     = link_to "sample app", root_path, class: "logo"
-  div
-    span.margin-x-md = link_to "Home", root_path
-    span.margin-x-md = link_to "Help", help_path
-    span.margin-x-md = link_to "Log in", '#'
+  .menu-items
+    ul
+      li
+        = link_to "Home", root_path
+      li
+        = link_to "Help", help_path
+      li.dropdown
+        - if logged_in?
+          = link_to "Users", '#'
+          ul.dropdown__items
+            li = link_to "Profile", current_user
+            li = link_to "Settings", '#'
+            li = link_to  "Log out", logout_path, method: :delete
+        - else
+          li = link_to "Log in", login_path
