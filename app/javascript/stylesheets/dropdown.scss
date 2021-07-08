@@ -1,11 +1,14 @@
 .dropdown {
-  display: flex;
-  flex-direction: column;
-  ul {
-    display: block;
-    width: 3em;
-    li {
+  .dropdown__items {
+    display: none;
+  }
+
+  &:hover {
+    //secondary ul visibility change
+    .dropdown__items {
       display: block;
+      // margin-top: 15px;
+      position: absolute;
     }
   }
 }
