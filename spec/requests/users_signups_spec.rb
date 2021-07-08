@@ -1,4 +1,5 @@
 require 'rails_helper'
+require_relative '../helpers/users_helper_spec'
 
 RSpec.describe "UsersSignups", type: :request do
   describe "GET /users_signups" do
@@ -15,9 +16,9 @@ RSpec.describe "UsersSignups", type: :request do
         post users_path, params: { user: {name: "Example User",
           email: "user@example.com", password: "password", password_confirmation: "password"}}
       end
-      binding.pry
       follow_redirect!
       expect(request.path).to(eq("/users/#{User.last.id}"))
+      assert is_logged_in?
     end
   end
 end
