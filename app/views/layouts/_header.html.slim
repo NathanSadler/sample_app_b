@@ -7,15 +7,15 @@ header
         = link_to "Home", root_path
       li
         = link_to "Help", help_path
-      li.dropdown
-        - if logged_in?
+      - if logged_in?
+        li.dropdown
           = link_to "Users", '#'
           ul.dropdown__items
             li = link_to "Profile", current_user
             li = link_to "Settings", '#'
             li = link_to  "Log out", logout_path, method: :delete
-        - else
-          li = link_to "Log in", login_path
+      - else
+        li = link_to "Log in", login_path
   .hamburger-menu
     input type="checkbox" id="hamburger-checkbox"
     label id="hamburger-checkbox" for="hamburger-checkbox"
