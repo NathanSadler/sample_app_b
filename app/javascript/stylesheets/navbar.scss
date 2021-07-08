@@ -1,3 +1,9 @@
+ul {
+  padding-left: 0px;
+  margin-left: 0px;
+  list-style-type: none;
+}
+
 header {
   display: flex;
   flex-direction: row;
@@ -15,9 +21,32 @@ header {
       }
   }
 
+  .hamburger-menu {
+    span {
+      display: block;
+      margin:4px;
+      height: 9px;
+      width:60px;
+      background: #d3531a;
+      border-radius: 9px;
+    }
+
+    input[type="checkbox"] {
+      display: none;
+    }
+
+    .hamburger-items {
+      display: none;
+    }
+
+    #hamburger-checkbox:checked ~ .hamburger-items {
+      display: block;
+    }
+
+  }
+
   .menu-items {
     ul {
-      list-style-type: none;
 
       // The items that display without being overed
       a, li, ul{
@@ -31,54 +60,9 @@ header {
         color: var(--neutral-layer-2-text);
       }
 
-      ul {
-        // display: block;
-        padding-left: 0px;
-        margin-left: 0px;
-      }
-
     }
   }
 }
 
-// .navbar {
-//   display: flex;
-//   flex-direction: row;
-//   background: var(--color-black);
-//   margin-bottom: var(--space-sm);
-//
-//   ul {
-//       list-style: none;
-//
-//       li {
-//         display: inline-block;
-//         margin: auto var(--space-md);
-//       }
-//   }
 
-//   a {
-//     color: var(--neutral-layer-1-text);
-//     text-decoration: none;
-//   }
-//
-//   a:hover {
-//     color: var(--neutral-layer-2-text);
-//   }
-//
-//   .logo {
-//     float: left;
-//     margin-right: 10px;
-//     font-size: 1.7em;
-//     text-transform: uppercase;
-//     font-weight: bold;
-//     text-decoration: none;
-//     color: var(--color-white);
-//   }
-//
-//   .logo:hover {
-//     color: var(--color-secondary-lighter);
-//     text-decoration: none;
-//   }
-//
-//
-// }
+// Use hamburger menu on mobile and dropdown menu on desktop

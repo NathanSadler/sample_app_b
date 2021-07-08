@@ -16,3 +16,14 @@ header.margin-right-md
             li = link_to  "Log out", logout_path, method: :delete
         - else
           li = link_to "Log in", login_path
+
+  .hamburger-menu
+    input type="checkbox" id="hamburger-checkbox"
+    label id="hamburger-checkbox" for="hamburger-checkbox"
+      - 3.times do
+        span
+    .hamburger-items
+      ul
+        li = link_to "Home", root_path
+        li = link_to "Help", help_path
+        
