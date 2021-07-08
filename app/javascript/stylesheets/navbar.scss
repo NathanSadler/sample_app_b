@@ -41,6 +41,7 @@ header {
 
     #hamburger-checkbox:checked ~ .hamburger-items {
       display: block;
+      width: 100%;
     }
 
   }
@@ -65,4 +66,16 @@ header {
 }
 
 
-// Use hamburger menu on mobile and dropdown menu on desktop
+// Use hamburger menu on mobile
+@media(max-width: 800px) {
+  .menu-items {
+    display: none;
+  }
+}
+
+// Use dropdown menu on desktop
+@media(min-width: 801px) {
+  .hamburger-menu {
+    display: none;
+  }
+}
