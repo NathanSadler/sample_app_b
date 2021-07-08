@@ -10,6 +10,10 @@ header {
   justify-content: space-between;
   background-color: var(--color-neutral-100);
 
+  a {
+    color: var(--neutral-layer-2-text);
+  }
+
   .logo {
       font-size: 1.7em;
       text-transform: uppercase;
@@ -62,7 +66,7 @@ header {
       }
 
       a:hover {
-        color: var(--neutral-layer-2-text);
+        color: var(--neutral-layer-1-text);
       }
     }
   }
