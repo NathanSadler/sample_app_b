@@ -2,5 +2,4 @@
 = provide(:button_text, "Create my account")
 .flex.flex-col.items-center.sign-form
   h1 Sign Up
-  = form_with(model: @user, local:true) do |f|
-    = render('form')
+  = render('form')
