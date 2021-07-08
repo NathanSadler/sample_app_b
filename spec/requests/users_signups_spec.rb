@@ -15,8 +15,9 @@ RSpec.describe "UsersSignups", type: :request do
         post users_path, params: { user: {name: "Example User",
           email: "user@example.com", password: "password", password_confirmation: "password"}}
       end
+      binding.pry
       follow_redirect!
-      expect(request.path).to(eq('/users/1'))
+      expect(request.path).to(eq("/users/#{User.last.id}"))
     end
   end
 end
