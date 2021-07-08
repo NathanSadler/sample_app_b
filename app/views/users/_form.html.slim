@@ -1,14 +1,21 @@
 = form_with(model: @user, local:true) do |f|
   = render 'shared/error_messages', object: @user
 
-  = f.label :name
-  = f.text_field :name, class: 'form-control'
+  div
+    = f.label :name
+    br
+    = f.text_field :name, class: 'form-control'
 
-  = f.label :email
-  = f.email_field :email, class: 'form-control'
+  div
+    = f.label :email
+    br
+    = f.email_field :email, class: 'form-control'
 
-  = [:password, :password_confirmation].each do |password_label|
-    = f.label password_label, class: 'form-control'
-    = f.password_field password_label, class: 'form-control'
+  - [:password, :password_confirmation].each do |password_label|
+    div
+      = f.label password_label, class: 'form-control'
+      br
+      = f.password_field password_label, class: 'form-control'
 
-  = f.submit yield(:button_text), class="btn btn--primary"
+  div
+    = f.submit yield(:button_text), class: "btn btn--primary full-width"
