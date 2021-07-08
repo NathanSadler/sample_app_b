@@ -8,7 +8,7 @@ header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color: var(--color-neutral-500);
+  background-color: var(--color-neutral-100);
 
   .logo {
       font-size: 1.7em;
@@ -49,19 +49,21 @@ header {
 
   .menu-items {
     ul {
+      font-size: 0px;
+      list-style-type: none;
+      margin-right: var(--space-lg);
 
-      // The items that display without being overed
-      a, li, ul{
-        color: var(--neutral-layer-1-text);
-        margin: auto var(--space-md);
-        position: relative;
+      // initial li
+      li {
+        font-size: 1rem;
         display: inline-block;
+        padding: 15px;
+        position: relative;
       }
 
       a:hover {
         color: var(--neutral-layer-2-text);
       }
-
     }
   }
 }

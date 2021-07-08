@@ -1,13 +1,19 @@
 .dropdown {
+  font-size: 0;
+
+  // Secondary unordered list
   .dropdown__items {
     display: none;
   }
 
+  // Initial hover
   &:hover {
     //secondary ul visibility change
+
     .dropdown__items {
       display: block;
-      // margin-top: 15px;
+      margin-top: 15px;
+      left: 0;
       position: absolute;
     }
   }
