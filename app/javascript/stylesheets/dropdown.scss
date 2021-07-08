@@ -4,12 +4,17 @@
   // Secondary unordered list
   .dropdown__items {
     display: none;
+    background-color: var(--neutral-layer-3-background);
+
+    a {
+      width: 10%;
+    }
   }
 
   // Initial hover
   &:hover {
+    background-color: var(--neutral-layer-2-background);
     //secondary ul visibility change
-
     .dropdown__items {
       display: block;
       margin-top: 15px;

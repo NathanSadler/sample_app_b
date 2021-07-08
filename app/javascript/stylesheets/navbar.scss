@@ -59,6 +59,10 @@ header {
 
       // initial li
       li {
+
+        &:hover {
+          background-color: var(--neutral-layer-4-background);
+        }
         font-size: 1rem;
         display: inline-block;
         padding: 15px;
