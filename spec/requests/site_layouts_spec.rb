@@ -5,7 +5,7 @@ RSpec.describe "SiteLayouts", type: :request do
     it "layout links" do
       get root_path
       expect(response.body.include?("<title>Ruby on Rails Tutorial Sample App"))
-      assert_select "a[href=?]", root_path, count: 2
+      assert_select "a[href=?]", root_path, count: 3
       [help_path, about_path, contact_path].each do |path|
         assert_select "a[href=?]", path
       end
