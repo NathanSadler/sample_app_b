@@ -54,6 +54,12 @@ RSpec.describe User, type: :model do
     expect(duplicate_user.valid?).to(eq(false))
   end
 
+  describe('authenticated?') do
+    it("should return false for a user with nil digest") do
+      expect(user.authenticated?('')).to(eq(false))
+    end
+  end
+
   context('password') do
     it("should be present") do
       user.password = user.password_confirmation = " " * 6
