@@ -7,6 +7,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       # Log user in and redirect to user's show page
       reset_session
+      # binding.pry
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
       # remember(user)
       log_in user

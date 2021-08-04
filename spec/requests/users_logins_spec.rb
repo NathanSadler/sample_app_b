@@ -34,7 +34,21 @@ RSpec.describe "UsersLogins", type: :request do
       assert_select "a[href=?]", login_path
       assert_select "a[href=?]", logout_path,      count: 0
       assert_select "a[href=?]", user_path(user), count: 0
+    end
 
+    it "creates a remember token when the remember me box is selected" do
+      log_in_user(user, remember_me: '1')
+      expect(cookies[:remember_token].blank?).to(eq(false))
+    end
+
+    it "doesn't create a remember token when the remember me box isn't selected" do
+      # login to set cookie
+      log_in_user(user, remember_me: '1')
+
+      # login again and make sure the cookie is deleted
+      log_in_user(user, remember_me: '0')
+
+      expect(cookies[:remember_token].blank?).to(eq(true))
     end
   end
 end
