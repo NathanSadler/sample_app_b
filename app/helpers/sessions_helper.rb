@@ -2,11 +2,16 @@ module SessionsHelper
   # Logs in the given user
   def log_in(user)
     session[:user_id] = user.id
+    # Guard against session replay attacks.
+    # See https://bit.ly/33UvK0w for more.
+    session[:session_token] = user.session_token
+
   end
 
   # Returns the user corresponding to the remember token cookie.
   def current_user
     # basically 'if session id exists'
+    # binding.pry
     if (user_id = session[:user_id])
       @current_user ||= User.find_by(id: user_id)
     # Gets users from temporary session if cookies[:user_id] exists and is logged in

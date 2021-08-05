@@ -11,5 +11,23 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe SessionsHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  fixtures :users
+  let!(:user) {users(:michael)}
+
+  before(:each) do
+    # remember(user)
+  end
+
+  describe("current_user") do
+    it("returns right user when session is nil") do
+      remember(user)
+      expect(user).to(eq(current_user))
+      expect(is_logged_in?).to(eq(true))
+    end
+
+    it("returns nil when the user digest is wrong") do
+      user.update_attribute(:remember_digest, User.digest(User.new_token))
+      expect(current_user.nil?).to(be(true))
+    end
+  end
 end
