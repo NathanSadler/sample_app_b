@@ -29,6 +29,7 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       # handle successful update
     else
+      # binding.pry
       render 'edit'
     end
   end
