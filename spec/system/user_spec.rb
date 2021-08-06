@@ -24,7 +24,6 @@ RSpec.describe "User", type: :system do
     end
 
     xit("should redirect update when not logged in") do
-      #binding.pry
       session.click_on("Log out", id: "ul.dropdown__items>li>a")
       patch user_path(@user), params: {user: {name: user.name, email: user.email}}
       expect(flash.empty?).to(be(false))
