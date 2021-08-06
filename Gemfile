@@ -13,6 +13,8 @@ gem 'bootstrap-sass', '3.4.1'
 gem 'pry'
 gem 'bcrypt'
 gem 'faker'
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '6.0.0'
