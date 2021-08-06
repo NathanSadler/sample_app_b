@@ -24,8 +24,6 @@ RSpec.describe "User", type: :system do
     it("doesn't let the user update a user's information if they aren't logged in") do
       session2 = Capybara::Session.new(:rack_test, Rails.application)
       session2.visit(edit_user_path(user))
-      submit_user_form(session: session2, name: "Foo Bar", email: "foo@bar.com", password: "", 
-        button_text: "Save Changes")
       expect(session2).to(have_content?("Please log in."))
     end
 
