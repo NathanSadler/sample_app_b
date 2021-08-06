@@ -4,6 +4,7 @@ RSpec.describe "User", type: :system do
   fixtures :users
   let(:user) {users(:michael)}
   let(:session) {Capybara::Session.new(:rack_test, Rails.application)}
+  let(:session2) {Capybara::Session.new(:rack_test, Rails.application)}
 
   before(:each) do
     session.visit(login_path)
@@ -29,15 +30,15 @@ RSpec.describe "User", type: :system do
     end
 
     it("doesn't let the user update a user's information if they aren't logged in") do
-      session2 = Capybara::Session.new(:rack_test, Rails.application)
       session2.visit(edit_user_path(user))
       expect(session2.has_content?("Please log in.")).to(be(true))
     end
 
+    it("takes the user to the edit page if they log in after being directed to the login page because they weren't signed in") do
+
+    end
+
     describe("a logged in user trying to update a different user") do
-
-      let(:session2) {Capybara::Session.new(:rack_test, Rails.application)}
-
       before(:each) do
         session2.visit(login_path)
         submit_login_form(session: session2, email: "duchess@example.gov", password: "password")
