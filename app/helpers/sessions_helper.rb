@@ -13,7 +13,10 @@ module SessionsHelper
     # basically 'if session id exists'
     # binding.pry
     if (user_id = session[:user_id])
-      @current_user ||= User.find_by(id: user_id)
+      user = User.find_by(id: user_id)
+      if user && session[:session_token] == user.session_token
+        @current_user = user
+      end
     # Gets users from temporary session if cookies[:user_id] exists and is logged in
     elsif (user_id = cookies.encrypted[:user_id])
       user = User.find_by(id: user_id)
