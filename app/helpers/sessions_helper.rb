@@ -27,6 +27,10 @@ module SessionsHelper
     # end
   end
 
+  def current_user?(user)
+    user && user == current_user
+  end
+
   def remember(user)
     user.remember
     cookies.permanent.encrypted[:user_id] = user.id
