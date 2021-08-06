@@ -36,7 +36,7 @@ RSpec.describe "User", type: :system do
 
     describe("a logged in user trying to update a different user") do
 
-        let(:session2) {Capybara::Session.new(:rack_test, Rails.application)}
+      let(:session2) {Capybara::Session.new(:rack_test, Rails.application)}
 
       before(:each) do
         session2.visit(login_path)
@@ -49,7 +49,7 @@ RSpec.describe "User", type: :system do
       end
 
       it("doesn't display a flash") do
-        expect(session2.body).to_not(have_content?('class="alert '))
+        expect(session2).to_not(have_content("Please log in."))
       end
     end
 
