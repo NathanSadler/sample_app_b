@@ -73,4 +73,14 @@ RSpec.describe "User", type: :system do
       end
     end
   end
+
+  describe("user actions") do
+    describe("index") do
+      it("prevents non-logged in users from seeing it") do
+        session2.visit(users_path)
+        expect(session2.current_path).to(eq("/login"))
+      end
+    end
+  end
+
 end
