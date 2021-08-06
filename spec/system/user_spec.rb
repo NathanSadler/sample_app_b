@@ -7,7 +7,7 @@ RSpec.describe "User", type: :system do
 
   before(:each) do
     session.visit(login_path)
-    submit_login_form(session: session, email: user.email, password: user.password)
+    submit_login_form(session: session, email: user.email, password: "password")
   end
 
   describe("user trying to update a user") do
@@ -23,18 +23,18 @@ RSpec.describe "User", type: :system do
 
     describe("with valid information") do
       before(:each) do
-        submit_user_form(session: session, name: "Foo Bar", email: "foo@bar.com", password: user.password, 
+        submit_user_form(session: session, name: "Foo Bar", email: "foo@bar.com", password: "", 
           button_text: "Save Changes")
       end
 
-      it("moves the user to their profile page") do
+      it("moves the user to their profile page and updates their information") do
         expect(session.has_no_button?("Save Changes")).to(be(true))
         expect(session.current_path).to(eq("/users/#{user.id}"))
       end
 
       it("updates their information") do
-        expect(user.name).to(eq("Foo Bar"))
-        expect(user.email).to(eq("foo@bar.com"))
+        expect(User.last.name).to(eq("Foo Bar"))
+        expect(User.last.email).to(eq("foo@bar.com"))
       end
     end
   end
