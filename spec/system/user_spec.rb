@@ -21,6 +21,13 @@ RSpec.describe "User", type: :system do
       expect(session).to(have_content("Password is too short"))
     end
 
+    xit("should redirect update when not logged in") do
+      #binding.pry
+      session.click_on("Log out", id: "ul.dropdown__items>li>a")
+      patch user_path(@user), params: {user: {name: user.name, email: user.email}}
+      expect(flash.empty?).to(be(false))
+    end
+
     it("doesn't let the user update a user's information if they aren't logged in") do
       session2 = Capybara::Session.new(:rack_test, Rails.application)
       session2.visit(edit_user_path(user))
