@@ -11,6 +11,7 @@ header
         li.dropdown
           = link_to "Users", '#'
           ul.dropdown__items
+            li = link_to "Users", users_path
             li = link_to "Profile", current_user
             li = link_to "Settings", edit_user_path(current_user)
             li = link_to  "Log out", logout_path, method: :delete
@@ -26,6 +27,7 @@ header
         li = link_to "Home", root_path
         li = link_to "Help", help_path
         - if logged_in?
+          li = link_to "Users", users_path
           li = link_to "Profile", current_user
           li = link_to "Settings", '#'
           li = link_to  "Log out", logout_path, method: :delete
