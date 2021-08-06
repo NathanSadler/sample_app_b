@@ -18,7 +18,7 @@ RSpec.describe "User", type: :system do
     it("keeps the user on the update user page if their update is unsuccessful") do
       submit_user_form(session: session, name: " ", email:"foo@invalid", password:"foo", password_confirmation: "bar", 
         button_text: "Save Changes")
-      expect(session.body).to(have_content("Password is too short"))
+      expect(session).to(have_content("Password is too short"))
     end
 
     describe("with valid information") do
@@ -27,7 +27,15 @@ RSpec.describe "User", type: :system do
           button_text: "Save Changes")
       end
 
+      it("moves the user to their profile page") do
+        expect(session.has_no_button?("Save Changes")).to(be(true))
+        expect(session.current_path).to(eq("/users/#{user.id}"))
+      end
 
+      it("updates their information") do
+        expect(user.name).to(eq("Foo Bar"))
+        expect(user.email).to(eq("foo@bar.com"))
+      end
     end
   end
 end
