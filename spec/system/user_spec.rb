@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe "User", type: :system do
   fixtures :users
   let(:user) {users(:michael)}
+  let(:user2) {users(:archer)}
   let(:session) {Capybara::Session.new(:rack_test, Rails.application)}
   let(:session2) {Capybara::Session.new(:rack_test, Rails.application)}
 
@@ -35,7 +36,6 @@ RSpec.describe "User", type: :system do
     end
 
     it("takes the user to the edit page if they log in after being directed to the login page because they weren't signed in") do
-
     end
 
     describe("a logged in user trying to update a different user") do
