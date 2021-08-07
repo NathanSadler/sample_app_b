@@ -75,6 +75,26 @@ RSpec.describe "User", type: :system do
   end
 
   describe("user actions") do
+    describe("destroy") do
+      it("lets admins delete users") do
+        user_count = User.count
+        session.visit(users_path)
+        session.find("ul.users>li:last-child>a:last-child").click
+        expect(User.count).to(eq(user_count - 1))
+      end
+
+      it("doesn't display delete links for non-admins") do
+        user.toggle!(:admin)
+        session.visit(users_path)
+        expect(session).to_not(have_content("delete"))
+      end
+
+      it("should redirect users when not logged in as an admin") do
+        user_count = User.count
+        delete user_path(2)
+        expect(User.count).to(eq(user_count))
+      end
+    end
     describe("index") do
       it("prevents non-logged in users from seeing it") do
         session2.visit(users_path)
