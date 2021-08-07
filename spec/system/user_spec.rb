@@ -37,7 +37,7 @@ RSpec.describe "User", type: :system do
     it("takes the user to the edit page if they log in after being directed to the login page because they weren't signed in") do
       session2.visit(edit_user_path(user2))
       submit_login_form(session: session2, email: user2.email, password: 'password')
-      expect(session2.current_path).to(eq("/users/#{User.last.id}/edit"))
+      expect(session2.current_path).to(eq("/users/#{user2.id}/edit"))
     end
 
     describe("a logged in user trying to update a different user") do
@@ -68,8 +68,8 @@ RSpec.describe "User", type: :system do
       end
 
       it("updates their information") do
-        expect(User.first.name).to(eq("Foo Bar"))
-        expect(User.first.email).to(eq("foo@bar.com"))
+        expect(User.find(user.id).name).to(eq("Foo Bar"))
+        expect(User.find(user.id).email).to(eq("foo@bar.com"))
       end
     end
   end
