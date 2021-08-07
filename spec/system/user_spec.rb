@@ -80,6 +80,11 @@ RSpec.describe "User", type: :system do
         session2.visit(users_path)
         expect(session2.current_path).to(eq("/login"))
       end
+
+      it("has pagination") do
+        session.visit(users_path)
+        expect(session.all("ul.pagination").length).to(eq(2))
+      end
     end
   end
 
