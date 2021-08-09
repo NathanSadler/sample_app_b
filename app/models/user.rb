@@ -48,4 +48,9 @@ class User < ApplicationRecord
   def downcase_email
     self.email = email.downcase
   end
+
+  def create_activation_digest
+    self.activation_token = User.new_token
+    self.activation_digest = User.digest(activation_token)
+  end
 end
