@@ -95,6 +95,7 @@ RSpec.describe "User", type: :system do
         expect(User.count).to(eq(user_count))
       end
     end
+
     describe("index") do
       it("prevents non-logged in users from seeing it") do
         session2.visit(users_path)

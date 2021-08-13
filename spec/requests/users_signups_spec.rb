@@ -6,10 +6,13 @@ RSpec.describe "UsersSignups", type: :request do
     it "doesn't accept invalid submissions" do
       get signup_path
       assert_no_difference 'User.count' do
-        post users_path, params: { user: {name: " ", email: "user@invalid",
-          password: "foo", password_confirmation: "bar"}}
+        post users_path, params: { user: {name: " ", 
+          email: "user@invalid",
+          password: "foo", 
+          password_confirmation: "bar"}}
       end
     end
+
     it "accepts valid submissions" do
       get signup_path
       assert_difference 'User.count', 1 do

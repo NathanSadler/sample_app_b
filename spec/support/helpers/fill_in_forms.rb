@@ -20,4 +20,14 @@ module FillInForms
     session.check("Remember me on this computer") if remember_me
     session.click_on("Log In")
   end
+
+  def sign_up(session:, name:, email:, password:, password_confirmation: nil)
+    session.visit(new_user_path)
+    submit_user_form(session: session, 
+    name: name,
+    email: email,
+    password: password,
+    button_text: "Create my account",
+    password_confirmation: password_confirmation)
+  end
 end
