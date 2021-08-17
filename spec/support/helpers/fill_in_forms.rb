@@ -3,10 +3,12 @@ module FillInForms
     session.fill_in 'Name', with: name
     session.fill_in 'Email', with: email
     session.fill_in 'Password', with: password
+    session.fill_in 'Password confirmation', with: password_confirmation if !password_confirmation.nil?
+    
   end
 
   def submit_user_form(session:, name:, email:, password:, button_text:, password_confirmation: nil)
-  fill_in_user_form(session, name, email, password, password_confirmation = nil)
+    fill_in_user_form(session, name, email, password, password_confirmation)
     session.click_on(button_text)
   end
 

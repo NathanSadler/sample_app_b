@@ -5,27 +5,37 @@ RSpec.describe 'UsersSignups', type: :system do
 
   let(:session) {Capybara::Session.new(:rack_test, Rails.application)}
 
+  def sign_up_with_invalid_data(current_session)
+    sign_up(
+      session: current_session,
+      name: '',
+      email: 'user@invalid', 
+      password: 'foo', 
+      password_confirmation: 'bar'
+    )
+  end
+
+  def sign_up_with_valid_data(current_session, name: 'Zoobiddibeep', email: 'zoobidi@beep.com')
+    sign_up(
+      session: current_session,
+      name: name,
+      email: email,
+      password: 'Zoobiddibeep!1',
+      password_confirmation: 'Zoobiddibeep!1'
+    )
+  end
+
   before(:each) do
     ActionMailer::Base.deliveries.clear
   end
 
   context 'signing up with invalid information' do
-    def sign_up_with_session(current_session)
-      sign_up(
-        session: current_session,
-        name: '',
-        email: 'user@invalid', 
-        password: 'foo', 
-        password_confirmation: 'bar'
-      )
-    end
-
     before(:each) do
-      sign_up_with_session(session)
+      sign_up_with_invalid_data(session)
     end
 
     it "doesn't create a new user" do
-      expect {sign_up_with_session(session)}.to_not change { User.count }
+      expect {sign_up_with_invalid_data(session)}.to_not change { User.count }
     end
 
     it 'displays a div listing the errors' do
@@ -36,6 +46,16 @@ RSpec.describe 'UsersSignups', type: :system do
 
     it "creates divs with class 'field_with_errors'" do
       expect(session.all('div.field_with_errors').length).to be > 0
+    end
+  end
+
+  context 'signing up with valid information' do
+    before(:each) do
+      sign_up_with_valid_data(session)
+    end
+
+    it 'creates a user' do
+      expect {sign_up_with_valid_data(Capybara::Session.new(:rack_test, Rails.application), name: "Eegooagoo", email: "egoo@agoo.com")}.to change {User.count}.by(1)
     end
   end
 end

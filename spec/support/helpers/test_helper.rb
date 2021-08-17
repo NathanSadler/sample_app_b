@@ -6,4 +6,6 @@ module TestHelper
   def visit_login_page(session)
     session.visit("/login")
   end
+
+  
 end
