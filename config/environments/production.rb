@@ -67,7 +67,7 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
   host = 'https://git.heroku.com/agile-coast-32917.git'
-  config.action_mailer.default_url_options = { host: https://agile-coast-32917.herokuapp.com }
+  config.action_mailer.default_url_options = { host: 'https://agile-coast-32917.herokuapp.com' }
   ActionMailer::Base.smtp_settings = {
     :address        => 'smtp.sendgrid.net',
     :port           => '587',
