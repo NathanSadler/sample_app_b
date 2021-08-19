@@ -54,8 +54,43 @@ RSpec.describe 'UsersSignups', type: :system do
       sign_up_with_valid_data(session)
     end
 
+    let(:user) {User.last}
+
     it 'creates a user' do
       expect {sign_up_with_valid_data(Capybara::Session.new(:rack_test, Rails.application), name: "Eegooagoo", email: "egoo@agoo.com")}.to change {User.count}.by(1)
+    end
+
+    it 'increases the size of ActionMailer::Base.deliveries.size' do
+      expect(ActionMailer::Base.deliveries.size).to(eq(1))
+    end
+
+    it "doesn't let the user log in before account activation" do
+      visit_login_page(session)
+      submit_login_form(session: session, email: user.email, password: 'Zoobiddibeep!1')
+      expect(session).to(have_content("Log in"))
+      expect(session).to_not(have_content("Users"))
+    end
+
+    it("doesn't log the user in when trying to validate their account with an invalid activation token") do
+      session.visit(edit_account_activation_path("invalid token", email: user.email))
+      expect(session).to(have_content("Log in"))
+      expect(session).to_not(have_content("Users"))
+    end
+
+    it("doesn't log the user in when trying to validate their account with the wrong email") do
+        session.visit(edit_account_activation_path(user.activation_token, email: "wrong", id: user.id))
+        session.refresh
+        expect(session).to(have_content("Log in"))
+        expect(session).to_not(have_content("Users"))
+    end
+
+
+    # TODO: figure out why this doesn't pass even though it works in the browser
+    xit("logs the user in when trying to validate their account with matching a matching email and validation token") do
+      # session.visit(edit_account_activation_path(user.activation_token, email: user.email, id: user.id))
+      session.visit()
+      expect(session).to_not(have_content("Log in"))
+      expect(session).to(have_content("Users"))
     end
   end
 end

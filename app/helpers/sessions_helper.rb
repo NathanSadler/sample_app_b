@@ -25,9 +25,6 @@ module SessionsHelper
         @current_user = user
       end
     end
-    # if session[:user_id]
-    #   @current_user ||= User.find_by(id: session[:user_id])
-    # end
   end
 
   def current_user?(user)
