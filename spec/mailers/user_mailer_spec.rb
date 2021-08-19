@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe UserMailer, type: :mailer do
   fixtures :users
-  let(:mail_from) { "nathan.sadler@rolemodelsoftware.com" }
+  let(:mail_from) { "nathansadler3@gmail.com" }
   let!(:user) {users(:michael)}
 
   before(:each) do
