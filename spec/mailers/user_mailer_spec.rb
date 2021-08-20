@@ -37,11 +37,11 @@ RSpec.describe UserMailer, type: :mailer do
   end
 
   describe "password_reset" do
-    let(:mail) { UserMailer.password_reset }
+    let(:mail) { UserMailer.password_reset(user) }
 
     it "renders the headers" do
       expect(mail.subject).to eq("Password reset")
-      expect(mail.to).to eq(["to@example.org"])
+      expect(mail.to).to eq([user.email])
       expect(mail.from).to eq([mail_from])
     end
 
