@@ -16,5 +16,6 @@ class PasswordResetsController < ApplicationController
   end
 
   def edit
+    # @user = User.find_by(email: params[:password_reset][:email].downcase)
   end
 end
