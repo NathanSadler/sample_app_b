@@ -30,11 +30,10 @@ RSpec.describe 'PasswordResets', type: :system do
     context 'with a valid email' do
       before(:each) do
         request_password_reset(session: session, email: user.email)
-        binding.pry
       end
 
       it("changes the user's reset digest") do
-        expect{request_password_reset(session: session, email: user.email)}.to change{user.reset_digest}
+        expect{request_password_reset(session: session, email: user.email)}.to change{User.find_by(name: user.name).reset_digest}
       end
     end
   end
