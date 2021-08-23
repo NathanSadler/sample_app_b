@@ -7,6 +7,7 @@ RSpec.describe 'PasswordResets', type: :system do
   let(:session) {Capybara::Session.new(:rack_test, Rails.application)}
 
   before(:each) do
+    ActionMailer::Base.deliveries.clear
     session.visit(new_password_reset_path)
   end
 
@@ -27,13 +28,17 @@ RSpec.describe 'PasswordResets', type: :system do
     end
     
     # Uses the 'valid email' section of listing 12.19 in the ruby on rails tutorial
-    context 'with a valid email' do
+    context 'with a valid email address' do
       before(:each) do
         request_password_reset(session: session, email: user.email)
       end
 
       it("changes the user's reset digest") do
         expect{request_password_reset(session: session, email: user.email)}.to change{User.find_by(name: user.name).reset_digest}
+      end
+
+      it('sends an email') do
+        expect(ActionMailer::Base.deliveries.size).to(eq(1))
       end
     end
   end
