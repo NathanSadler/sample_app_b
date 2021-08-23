@@ -7,6 +7,9 @@ RSpec.describe 'PasswordResets', type: :system do
 
   before(:each) do
     session.visit(new_password_reset_path)
+  end
+
+  context 'trying to reset a password using an invalid email' do
     
   end
 end
