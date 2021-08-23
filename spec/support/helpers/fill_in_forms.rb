@@ -34,4 +34,10 @@ module FillInForms
     button_text: "Create my account",
     password_confirmation: password_confirmation)
   end
+
+  def request_password_reset(session, email)
+    session.visit(new_password_reset_path)
+    session.fill_in 'Email', with: email
+    session.click_on("Submit")
+  end
 end
