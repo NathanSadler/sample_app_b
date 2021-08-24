@@ -3,7 +3,7 @@ require_relative '../helpers/users_helper_spec'
 
 RSpec.describe 'PasswordResets', type: :system do
   fixtures :users
-  let(:user) {users(:michael)}
+  let(:user) {User.find_by(name: users(:michael).name)}
   let(:session) {Capybara::Session.new(:rack_test, Rails.application)}
 
   before(:each) do
@@ -49,6 +49,34 @@ RSpec.describe 'PasswordResets', type: :system do
       it('directs the user to the home page') do
         expect(session.current_path).to(eq('/'))
       end
+    end
+  end
+
+   # Uses the sections from 'wrong email' to 'right email, wrong token' of listing 12.19 in the ruby on rails tutorial
+  context 'trying to go to the password reset form' do
+    before(:each) do
+      request_password_reset(session: session, email: user.email)
+    end
+
+    it('returns users to the root path if they are using the wrong email') do
+      session.visit(edit_password_reset_path(user.reset_token, email: "", id: user.id))
+      expect(session.current_path).to(eq('/'))
+    end
+
+    it('returns users to the root path if their account is not activated yet') do
+      user.toggle!(:activated)
+      session.visit(edit_password_reset_path(user.reset_token, email: user.email, id: user.id))
+      expect(session.current_path).to(eq('/'))
+    end
+
+    it('returns users to the root path if they have the right email and the wrong token') do
+      session.visit(edit_password_reset_path("wrong token", email: user.email, id: user.id))
+      expect(session.current_path).to(eq('/'))
+    end
+
+    it('takes users to the password reset form if both the email and token are correct') do
+      session.visit(edit_password_reset_path(user.reset_token, email: user.email, id: user.id))
+      expect(session.current_path).to(eq('/password_resets/edit'))
     end
   end
 end
