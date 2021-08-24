@@ -40,6 +40,15 @@ RSpec.describe 'PasswordResets', type: :system do
       it('sends an email') do
         expect(ActionMailer::Base.deliveries.size).to(eq(1))
       end
+
+      it('generates a flash message telling the user a password reset email was sent') do
+        expected_message = 'Email sent with password reset instructions'
+        expect(session.find('div.alert.alert-info').text).to(eq(expected_message))
+      end
+
+      it('directs the user to the home page') do
+        expect(session.current_path).to(eq('/'))
+      end
     end
   end
 end
