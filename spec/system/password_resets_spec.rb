@@ -3,7 +3,8 @@ require_relative '../helpers/users_helper_spec'
 
 RSpec.describe 'PasswordResets', type: :system do
   fixtures :users
-  let(:user) {User.find_by(name: users(:michael).name)}
+  # let(:user) {User.find_by(name: users(:michael).name)}
+  let(:user) {users(:michael)}
   let(:session) {Capybara::Session.new(:rack_test, Rails.application)}
 
   before(:each) do
@@ -56,6 +57,8 @@ RSpec.describe 'PasswordResets', type: :system do
   context 'trying to go to the password reset form' do
     before(:each) do
       request_password_reset(session: session, email: user.email)
+      @user = User.find_by(name: users(:michael).name)
+      # binding.pry
     end
 
     it('returns users to the root path if they are using the wrong email') do
@@ -75,8 +78,18 @@ RSpec.describe 'PasswordResets', type: :system do
     end
 
     it('takes users to the password reset form if both the email and token are correct') do
-      session.visit(edit_password_reset_path(user.reset_token, email: user.email, id: user.id))
+      session.visit(edit_password_reset_path(@user.reset_token, email: user.email, id: @user.reset_token))
       expect(session.current_path).to(eq('/password_resets/edit'))
+    end
+  end
+end
+
+RSpec.describe("Help") do
+  context("me") do
+    it("now") do
+      get new_password_reset_path
+      assert_template 'password_resets/new'
+      assert_select 'input[name=?]', 'password_reset[email]'
     end
   end
 end

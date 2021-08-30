@@ -16,6 +16,8 @@ gem 'faker'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 
+gem 'rails-controller-testing'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '6.0.0'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
