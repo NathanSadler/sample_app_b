@@ -3,7 +3,6 @@ require_relative '../helpers/users_helper_spec'
 
 RSpec.describe 'PasswordResets', type: :system do
   fixtures :users
-  # let(:user) {User.find_by(name: users(:michael).name)}
   let(:user) {users(:michael)}
   let(:session) {Capybara::Session.new(:rack_test, Rails.application)}
 
@@ -12,7 +11,7 @@ RSpec.describe 'PasswordResets', type: :system do
     session.visit(new_password_reset_path)
   end
 
-  context 'requesting a password reset' do
+  xcontext 'requesting a password reset' do
       # Uses the 'invalid email' section of listing 12.19 in the ruby on rails tutorial
     context 'using an invalid email' do
       before(:each) do
@@ -54,42 +53,91 @@ RSpec.describe 'PasswordResets', type: :system do
   end
 
    # Uses the sections from 'wrong email' to 'right email, wrong token' of listing 12.19 in the ruby on rails tutorial
-  context 'trying to go to the password reset form' do
+  xcontext 'trying to go to the password reset form' do
     before(:each) do
       request_password_reset(session: session, email: user.email)
-      @user = User.find_by(name: users(:michael).name)
-      # binding.pry
     end
 
     it('returns users to the root path if they are using the wrong email') do
-      session.visit(edit_password_reset_path(user.reset_token, email: "", id: user.id))
+      session.visit(edit_password_reset_path(user.reset_token, email: ""))
       expect(session.current_path).to(eq('/'))
     end
 
     it('returns users to the root path if their account is not activated yet') do
       user.toggle!(:activated)
-      session.visit(edit_password_reset_path(user.reset_token, email: user.email, id: user.id))
+      session.visit(edit_password_reset_path(user.reset_token, email: user.email))
       expect(session.current_path).to(eq('/'))
     end
 
     it('returns users to the root path if they have the right email and the wrong token') do
-      session.visit(edit_password_reset_path("wrong token", email: user.email, id: user.id))
+      session.visit(edit_password_reset_path("wrong token", email: user.email))
       expect(session.current_path).to(eq('/'))
     end
 
     it('takes users to the password reset form if both the email and token are correct') do
-      session.visit(edit_password_reset_path(@user.reset_token, email: user.email, id: @user.reset_token))
+      binding.pry
+      session.visit(edit_password_reset_path(@user.reset_token, email: user.email))
       expect(session.current_path).to(eq('/password_resets/edit'))
     end
   end
 end
 
-RSpec.describe("Help") do
-  context("me") do
-    it("now") do
-      get new_password_reset_path
-      assert_template 'password_resets/new'
-      assert_select 'input[name=?]', 'password_reset[email]'
-    end
+# Uses the sections from 'wrong email' to 'right email, wrong token' of listing 12.19 in the ruby on rails tutorial
+RSpec.describe 'Help', type: :request do
+  fixtures :users
+  let(:user) {users(:michael)}
+
+  it("just works") do
+    get new_password_reset_path
+    assert_template 'password_resets/new'
+    assert_select 'input[name=?]', 'password_reset[email]'
+    # Invalid email
+    post password_resets_path, params: { password_reset: { email: "" } }
+    assert_not flash.empty?
+    assert_template 'password_resets/new'
+    # Valid email
+    post password_resets_path,
+         params: { password_reset: { email: user.email } }
+    assert_not user.reset_digest == user.reload.reset_digest
+    assert_equal 1, ActionMailer::Base.deliveries.size
+    assert_not flash.empty?
+    assert_redirected_to root_url
+    # Password reset form
+    user = assigns(:user)
+    # Wrong email
+    get edit_password_reset_path(user.reset_token, email: "")
+    assert_redirected_to root_url
+    # Inactive user
+    user.toggle!(:activated)
+    get edit_password_reset_path(user.reset_token, email: user.email)
+    assert_redirected_to root_url
+    user.toggle!(:activated)
+    # Right email, wrong token
+    get edit_password_reset_path('wrong token', email: user.email)
+    assert_redirected_to root_url
+    # Right email, right token
+    get edit_password_reset_path(user.reset_token, email: user.email)
+    assert_template 'password_resets/edit'
+    assert_select "input[name=email][type=hidden][value=?]", user.email
+    # Invalid password & confirmation
+    patch password_reset_path(user.reset_token),
+          params: { email: user.email,
+                    user: { password:              "foobaz",
+                            password_confirmation: "barquux" } }
+    assert_select 'div#error_explanation'
+    # Empty password
+    patch password_reset_path(user.reset_token),
+          params: { email: user.email,
+                    user: { password:              "",
+                            password_confirmation: "" } }
+    assert_select 'div#error_explanation'
+    # Valid password & confirmation
+    patch password_reset_path(user.reset_token),
+          params: { email: user.email,
+                    user: { password:              "foobaz",
+                            password_confirmation: "foobaz" } }
+    assert is_logged_in?
+    assert_not flash.empty?
+    assert_redirected_to user
   end
 end

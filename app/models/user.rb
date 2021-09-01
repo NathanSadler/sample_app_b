@@ -59,7 +59,6 @@ class User < ApplicationRecord
     self.reset_token = User.new_token
     update_attribute(:reset_digest, User.digest(reset_token))
     update_attribute(:reset_sent_at, Time.zone.now)
-    #binding.pry
   end
 
   def send_password_reset_email
