@@ -37,6 +37,10 @@ RSpec.describe UserMailer, type: :mailer do
   end
 
   describe "password_reset" do
+    before(:each) do
+      user.reset_token = User.new_token
+    end
+    
     let(:mail) { UserMailer.password_reset(user) }
 
     it "renders the headers" do
