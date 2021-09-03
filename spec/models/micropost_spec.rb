@@ -4,7 +4,7 @@ RSpec.describe Micropost, type: :model do
   fixtures :users
   let(:user) {users(:michael)}
 
-  let(:micropost) {Micropost.new(content: 'Lorem ipsum', user_id: user.id)}
+  let(:micropost) {user.microposts.build(content: 'Lorem Ipsum')}
 
   context('validations') do
     it('should succeed when given content and a user id') do
