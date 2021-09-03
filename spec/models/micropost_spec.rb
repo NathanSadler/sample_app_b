@@ -13,7 +13,16 @@ RSpec.describe Micropost, type: :model do
 
     it('should fail when not given a user id') do
       micropost.user_id = nil
-      binding.pry
+      expect(micropost.valid?).to(be(false))
+    end
+
+    it('should fail when content is not present') do
+      micropost.content = "   "
+      expect(micropost.valid?).to(be(false))
+    end
+
+    it('should fail when the content is more than 140 characters') do
+      micropost.content = "a" * 141
       expect(micropost.valid?).to(be(false))
     end
   end
