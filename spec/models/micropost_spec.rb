@@ -31,4 +31,5 @@ RSpec.describe Micropost, type: :model do
   it('should be ordered with the first being the most recent') do
     expect(microposts(:most_recent)).to(eq(Micropost.first))
   end
+
 end

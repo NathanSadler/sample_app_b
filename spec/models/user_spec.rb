@@ -15,6 +15,12 @@ RSpec.describe User, type: :model do
     expect(user.valid?).to(eq(false))
   end
 
+  it('should destroy associated microposts when destroyed') do
+    user.save
+    user.microposts.create!(content: 'Lorem ipsum')
+    expect {user.destroy}.to change {Micropost.count}.by(-1)
+  end
+
   it("should not have a name longer than 50 chars") do
     user.name = "A" * 51
     expect(user.valid?).to(eq(false))
