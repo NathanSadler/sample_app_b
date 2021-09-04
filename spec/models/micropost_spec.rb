@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Micropost, type: :model do
   fixtures :users
+  fixtures :microposts
   let(:user) {users(:michael)}
 
   let(:micropost) {user.microposts.build(content: 'Lorem Ipsum')}
@@ -25,5 +26,9 @@ RSpec.describe Micropost, type: :model do
       micropost.content = "a" * 141
       expect(micropost.valid?).to(be(false))
     end
+  end
+
+  it('should be ordered with the first being the most recent') do
+    expect(microposts(:most_recent)).to(eq(Micropost.first))
   end
 end
