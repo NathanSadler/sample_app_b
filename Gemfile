@@ -7,6 +7,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 gem 'rails', '~> 6.1.3', '>= 6.1.3.2'
 
 gem 'active_storage_validations'
+gem 'image_processing'
+gem 'mini_magick'
 
 # Use Puma as the app server
 gem 'puma', '~> 5.3.1'
