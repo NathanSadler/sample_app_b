@@ -28,6 +28,21 @@ class User < ApplicationRecord
     SecureRandom.urlsafe_base64
   end
 
+  # Follows a user.
+  def follow(other_user)
+    following << other_user unless self == other_user
+  end
+
+  # Unfollows a user.
+  def unfollow(other_user)
+    following.delete(other_user)
+  end
+
+  # Returns true if the current user is following the other user.
+  def following?(other_user)
+    following.include?(other_user)
+  end
+
   def remember
     self.remember_token = User.new_token
     update_attribute(:remember_digest, User.digest(remember_token))

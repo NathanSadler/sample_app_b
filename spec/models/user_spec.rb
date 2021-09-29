@@ -6,9 +6,47 @@ RSpec.describe User, type: :model do
   let(:user) {User.new(name: "Test user", email: "user@example.com",
     password: "foobar", password_confirmation: "foobar")}
 
+  fixtures :users
+
+  let(:michael) {users(:michael)}
+  let(:archer) {users(:archer)}
+
   it("is initially valid") do
     expect(user.valid?).to(eq(true))
   end
+
+  describe('#follow') do
+    it('lets a user follow another user') do
+      michael.follow(archer)
+      expect(michael.following?(archer)).to(eq(true))
+    end
+
+    it('does not let a user follow themself') do
+      michael.follow(michael)
+      expect(michael.following?(michael)).to(eq(false))
+    end
+  end
+
+  describe('#unfollow') do
+    it('lets one user unfollow another') do
+      michael.follow(archer)
+      michael.unfollow(archer)
+      expect(michael.following?(archer)).to(eq(false))
+    end
+  end
+
+  # it("following/unfollowing users") do
+  #   michael = users(:michael)
+  #   archer = users(:archer)
+  #   assert_not michael.following?(archer)
+  #   michael.follow(archer)
+  #   assert michael.following?(archer)
+  #   michael.unfollow(archer)
+  #   assert_not michael.following?(archer)
+  #   # Users can't follow themselves.
+  #   michael.follow(michael)
+  #   assert_not michael.following?(michael)
+  # end
 
   it("should have an name present") do
     user.name = "     "
