@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :microposts, dependent: :destroy 
+  has_many :microposts, dependent: :destroy
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save :downcase_email
   before_create :create_activation_digest
@@ -10,6 +10,11 @@ class User < ApplicationRecord
     uniqueness: true})
   has_secure_password
   validates(:password, {presence: true, length: {minimum: 6}, allow_nil: true})
+  has_many :microposts, dependent: :destroy
+  has_many :active_relationships, class_name:  "Relationship",
+                                  foreign_key: "follower_id",
+                                  dependent:   :destroy
+
 
   # Returns the hash digest of the given string.
   def User.digest(string)
@@ -21,8 +26,8 @@ class User < ApplicationRecord
   # Returns a random token
   def User.new_token
     SecureRandom.urlsafe_base64
-  end 
-  
+  end
+
   def remember
     self.remember_token = User.new_token
     update_attribute(:remember_digest, User.digest(remember_token))
