@@ -16,9 +16,14 @@ RSpec.describe User, type: :model do
   end
 
   describe('#follow') do
+    before(:each) {michael.follow(archer)}
+
     it('lets a user follow another user') do
-      michael.follow(archer)
       expect(michael.following?(archer)).to(eq(true))
+    end
+
+    it("adds the following user to the followed's list of followers") do
+      expect(archer.followers.include?(michael)).to(eq(true))
     end
 
     it('does not let a user follow themself') do
