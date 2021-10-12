@@ -3,6 +3,8 @@
     aside class="col-md-4"
       section class="user-info"
         = render("shared/user_info")
+      section.stats
+        = render 'shared/stats'
       section class='micropost_form'
         = render('shared/micropost_form')
     div class="col-md-8"
