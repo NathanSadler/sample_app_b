@@ -118,3 +118,4 @@ end
 # end
 
 gem 'slim'
+gem 'slim-rails'
