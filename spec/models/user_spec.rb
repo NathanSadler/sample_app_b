@@ -10,6 +10,7 @@ RSpec.describe User, type: :model do
 
   let(:michael) {users(:michael)}
   let(:archer) {users(:archer)}
+  let(:lana) {users(:lana)}
 
   it("is initially valid") do
     expect(user.valid?).to(eq(true))
@@ -40,18 +41,44 @@ RSpec.describe User, type: :model do
     end
   end
 
-  # it("following/unfollowing users") do
-  #   michael = users(:michael)
-  #   archer = users(:archer)
-  #   assert_not michael.following?(archer)
-  #   michael.follow(archer)
-  #   assert michael.following?(archer)
-  #   michael.unfollow(archer)
-  #   assert_not michael.following?(archer)
-  #   # Users can't follow themselves.
-  #   michael.follow(michael)
-  #   assert_not michael.following?(michael)
-  # end
+  describe('#feed') do
+    it('contains of the posts of each user the user is following') do
+      lana.microposts.each do |post_following|
+        expect(michael.feed.include?(post_following)).to(eq(true))
+      end
+    end
+
+    it("contains the user's own posts if they have followers") do
+      michael.microposts.each do |post_self|
+        expect(michael.feed.include?(post_self)).to(eq(true))
+      end
+    end
+
+    it("contains the user's own posts if they don't have followers") do
+      archer.microposts.each do |post_self|
+        expect(archer.feed.include?(post_self)).to(eq(true))
+      end
+    end
+
+    it("does not contain posts from users that the user doesn't follow") do
+      archer.microposts.each do |post_unfollowed|
+        expect(michael.feed.include?(post_unfollowed)).to(eq(false))
+      end
+    end
+  end
+
+  it("following/unfollowing users") do
+    michael = users(:michael)
+    archer = users(:archer)
+    assert !michael.following?(archer)
+    michael.follow(archer)
+    assert michael.following?(archer)
+    michael.unfollow(archer)
+    assert !michael.following?(archer)
+    # Users can't follow themselves.
+    michael.follow(michael)
+    assert !michael.following?(michael)
+  end
 
   it("should have an name present") do
     user.name = "     "
