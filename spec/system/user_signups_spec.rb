@@ -9,8 +9,8 @@ RSpec.describe 'UsersSignups', type: :system do
     sign_up(
       session: current_session,
       name: '',
-      email: 'user@invalid', 
-      password: 'foo', 
+      email: 'user@invalid',
+      password: 'foo',
       password_confirmation: 'bar'
     )
   end
@@ -94,4 +94,3 @@ RSpec.describe 'UsersSignups', type: :system do
     end
   end
 end
-
