@@ -31,3 +31,18 @@
 
   background: var(--color-primary);
 }
+
+.section--icons {
+  h4 {
+    text-transform: none;
+    font-weight: bold;
+  }
+
+  .code {
+    font-family: monospace;
+    background: var(--color-neutral-50);
+    border-radius: var(--radius-sm);
+    word-wrap: break-word;
+    padding: 0.4rem 0.3rem;
+  }
+}

@@ -10,8 +10,8 @@ html
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
   body
     = render 'layouts/header'
+     = render 'shared/flash'
     - flash.each do |message_type, message|
       .alert class="alert-#{message_type}" = message
     = yield
     = render 'layouts/footer'
-    

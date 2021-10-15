@@ -4,15 +4,6 @@
   box-sizing: border-box;
 }
 
-a {
-  color: var(--color-primary);
-  text-decoration: none;
-}
-
-a:hover {
-  color: var(--color-primary-light);
-}
-
 html {
   height: 100%;
 
@@ -35,8 +26,7 @@ button, input, optgroup, select, textarea {
   line-height: inherit;
 }
 
-blockquote, dl, dd, h1, h2, h3, h4, h5, h6, figure, pre, label, p {
-  color: var(--neutral-layer-1-text);
+blockquote, dl, dd, h1, h2, h3, h4, h5, h6, figure, pre {
   margin: 0;
 }
 
