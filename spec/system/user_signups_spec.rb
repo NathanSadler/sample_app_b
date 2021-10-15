@@ -49,6 +49,30 @@ RSpec.describe 'UsersSignups', type: :system do
     end
   end
 
+  # context('valid signup information with account activation') do
+  #   before(:each) do
+  #     sign_up_with_valid_data(session)
+  #   end
+
+  #   let(:user) {User.last}
+
+  #   it 'creates a user' do
+  #     expect {sign_up_with_valid_data(Capybara::Session.new(:rack_test, Rails.application), name: "Eegooagoo", email: "egoo@agoo.com")}.to change {User.count}.by(1)
+  #   end
+
+  #   it 'increases the size of ActionMailer::Base.deliveries.size' do
+  #     expect(ActionMailer::Base.deliveries.size).to(eq(1))
+  #   end
+
+  #   xdescribe('trying to log in before account activation') do
+  #     it("does not let the user log in") do
+  #       binding.pry
+  #       log_in_as(user)
+  #       expect(session[:user_id]).to(eq(nil))
+  #     end
+  #   end
+  # end
+
   context 'signing up with valid information' do
     before(:each) do
       sign_up_with_valid_data(session)
