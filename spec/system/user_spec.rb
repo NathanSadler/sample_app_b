@@ -35,9 +35,10 @@ RSpec.describe "User", type: :system do
       expect(session).to(have_content("Password is too short"))
     end
 
-    xit("should redirect update when not logged in") do
-      session.click_on("Log out", id: "ul.dropdown__items>li>a")
-      patch user_path(@user), params: {user: {name: user.name, email: user.email}}
+    it("should redirect update when not logged in") do
+      session.find('.dropdown>ul>li>a', text: "Log out").click
+      expect(session.current_path).to(eq('/'))
+      patch user_path(user), params: {user: {name: user.name, email: user.email}}
       expect(flash.empty?).to(be(false))
     end
 
