@@ -44,9 +44,12 @@ $gray-medium-light: #eaeaea;
 
 /* sidebar */
 aside {
+  margin-bottom: var(--space-xs);
+
   section.user-info {
     margin-top: var(--space-md);
   }
+
   section {
     padding: var(--space-sm) 0px;
     margin-top: var(--space-md);
@@ -61,7 +64,6 @@ aside {
     }
     h1 {
       text-align: left;
-      margin-bottom: var(--space-xs);
       margin-top: 0px;
     }
   }
@@ -83,19 +85,21 @@ aside {
   a {
     float: left;
     padding: 0 var(--space-sm);
-    border-left: var(--space-xs) solid var(--neutral-layer-5-text);
-  }
-  &:first-child {
-    padding-left: 0;
-    border: 0;
+    border-left: var(--space-xxs) solid $color-neutral-200;
+
+    &:first-child {
+      padding-left: 0;
+      border: 0;
+    }
   }
   &:hover {
     text-decoration: none;
     color: blue;
   }
-}
-strong {
-  display: block;
+
+  strong {
+    display: block;
+  }
 }
 
 .user_avatars {
@@ -132,5 +136,12 @@ strong {
     overflow: auto;
     padding: var(--space-sm) 0;
     // border-bottom: 1px solid gray-lighter;
+  }
+}
+
+/* the follow/unfollow button */
+#follow_form {
+  .btn {
+    width: 100%;
   }
 }

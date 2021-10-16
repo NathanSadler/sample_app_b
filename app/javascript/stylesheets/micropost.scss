@@ -3,10 +3,11 @@
 .microposts {
   list-style: none;
   padding: 0;
+  width: 100;
 
   li {
     padding: var(--space-sm);
-    border-top: 1px solid $color-neutral-50;
+    border-top: 1px solid $color-neutral-200;
   }
   .user {
     margin-top: 5em;
