@@ -1,0 +1,39 @@
+.pagination {
+  /* Make the pagination options display horizontally */
+  display: flex;
+  flex-direction: row;
+
+  ul.pagination {
+    /* Display a rounded border around the pagination bar */
+    border: 1px solid $color-neutral-200;
+    border-radius: var(--space-xs);
+
+    li {
+      /* Add a border line to the left of every pagination option*/
+      border-left: 1px solid $color-neutral-200;
+
+      a {
+        /* Make it so that the link can be activated from anywhere in its box. Also increases the size of those blocks*/
+        display: block;
+        padding: var(--space-sm);
+      }
+
+      &:hover {
+        background-color: var(--color-neutral-300);
+      }
+    }
+
+    li:first-of-type {
+      /* remove additonal left border on first pagination option*/
+      border-left: none;
+    }
+
+    li.active {
+      /* Make selected pagination option have a different background color and text color*/
+      background-color: var(--color-primary);
+      a {
+        color: var(--neutral-layer-app-text);
+      }
+    }
+  }
+}
