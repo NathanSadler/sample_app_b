@@ -1,25 +1,26 @@
-- if logged_in?
-  .row
-    aside class="col-md-4"
-      section class="user-info"
-        = render("shared/user_info")
-      section.stats
-        = render 'shared/stats'
-      section class='micropost_form'
-        = render('shared/micropost_form')
-    div class="col-md-8"
-      h3 Micropost Feed
-      = render 'shared/feed'
-- else
-  .card.flex.flex-col
-    h1 Welcome to the Sample App
-    h2
-      ' This is the home page for the
-      a href="https://www.railstutorial.org/"
-        | Ruby on Rails Tutorial
-      '
-      | sample application.
-    .self-center
-      .btn.btn--primary = link_to "Sign up now!", signup_path
+.container
+  - if logged_in?
+    .flex.flex-row
+      .flex.flex-col style="width:33%"
+        section class="user-info"
+          = render("shared/user_info")
+        section.stats
+          = render 'shared/stats'
+        section class='micropost_form'
+          = render('shared/micropost_form')
+      .flex.flex-col style="width:67%"
+        h3 Micropost Feed
+        = render 'shared/feed'
+  - else
+    .card.flex.flex-col
+      h1 Welcome to the Sample App
+      h2
+        ' This is the home page for the
+        a href="https://www.railstutorial.org/"
+          | Ruby on Rails Tutorial
+        '
+        | sample application.
+      .self-center
+        .btn.btn--primary = link_to "Sign up now!", signup_path
 
-  = link_to image_tag("rails.svg", alt: "Rails logo", width: "200"), "https://rubyonrails.org/"
+    = link_to image_tag("rails.svg", alt: "Rails logo", width: "200"), "https://rubyonrails.org/"

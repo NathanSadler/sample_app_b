@@ -24,6 +24,24 @@ $gray-medium-light: #eaeaea;
   }
 }
 
+.micropost-form {
+  margin-right: var(--space-md);
+
+  form {
+    textarea {
+      margin-bottom: var(--space-md);
+      width: 100%;
+      resize: none;
+    };
+
+    input {
+      margin-bottom: var(--space-md);
+    }
+  };
+
+
+}
+
 .field_with_errors {
   // @extend .has-error !optional;
   .form-control {
@@ -81,7 +99,9 @@ aside {
 .stats {
   overflow: auto;
   margin-top: 0;
+  margin-bottom: var(--space-sm);
   padding: 0;
+
   a {
     float: left;
     padding: 0 var(--space-sm);

@@ -1,7 +1,8 @@
-= simple_form_for(@micropost, local: true) do |f|
-  = f.input :content, placeholder: 'Compose new micropost'
-  = f.file_field :image, accept: "image/jpeg, image/gif, image/png"
-  = f.submit 'Post'
+.micropost-form
+  = simple_form_for(@micropost) do |f|
+    = f.input :content, placeholder: 'Compose new micropost', label: false
+    = f.submit 'Post', class: "btn btn--primary full-width"
+    = f.file_field :image, accept: "image/jpeg, image/gif, image/png"
 
 script type="text/javascript">
   $("#micropost_image").bind("change", function() {
